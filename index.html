@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <!-- 苹果适配核心：宽度=设备宽度 + 覆盖安全区（刘海/灵动岛/底部条） -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <!-- 禁止自动缩放电话号码等（可选，但推荐） -->
+  <meta name="format-detection" content="telephone=no">
+  <title>选择系统</title>
+  
+  <style>
+    /* 重置 + 苹果全屏适配 */
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: -webkit-fill-available;   /* 苹果Safari专用，处理动态底部条 */
+      min-height: 100vh;                /* 普通浏览器回退 */
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #f5f5f5;
+      color: #333;
+      -webkit-tap-highlight-color: transparent; /* 去除点击高亮 */
+    }
+
+    body {
+      /* 用padding避开刘海/灵动岛/底部Home条 */
+      padding-top: env(safe-area-inset-top);
+      padding-bottom: env(safe-area-inset-bottom);
+      padding-left: env(safe-area-inset-left);
+      padding-right: env(safe-area-inset-right);
+      
+      /* 安全区回退（旧iOS或不支持env时用固定值） */
+      padding-top: max(env(safe-area-inset-top), 20px);
+      padding-bottom: max(env(safe-area-inset-bottom), 34px); /* 常见底部条高度 */
+      
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: clamp(24px, 7vw, 32px); /* 自适应字体大小 */
+      margin: 0 0 24px;
+      font-weight: 600;
+    }
+
+    .explain {
+      font-size: clamp(15px, 4.2vw, 17px);
+      line-height: 1.6;
+      margin: 0 auto 40px;
+      max-width: 90%;
+      padding: 0 10px;
+    }
+
+    .btn {
+      display: block;
+      width: 85%;
+      max-width: 340px;
+      margin: 16px auto;
+      padding: 18px 0;
+      font-size: clamp(17px, 4.8vw, 19px);
+      font-weight: bold;
+      color: white;
+      text-decoration: none;
+      border-radius: 14px;
+      box-shadow: 0 5px 12px rgba(0,0,0,0.18);
+      transition: transform 0.1s;
+    }
+
+    .btn:active {
+      transform: scale(0.96); /* 按下反馈，苹果风格 */
+    }
+
+    .new {
+      background: linear-gradient(135deg, #007aff, #0062cc); /* 更现代的苹果蓝渐变 */
+    }
+
+    .old {
+      background: #8e8e93;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>请选择要使用的系统</h1>
+  
+  <div class="explain">
+    我们准备了两个系统版本供您选择：<br><br>
+    • <strong>新系统</strong>：速度更快、界面更现代、更安全稳定<br>
+    　我们<strong>强烈推荐</strong>您立即切换到新系统！<br><br>
+    • <strong>老系统</strong>：如果您非常习惯原来的操作方式，可以先继续使用<br><br>
+    两个系统并存是为了让大家平滑过渡，<strong>建议尽快切换新系统</strong>，未来老系统将逐步下线。
+  </div>
+
+  <a href="https://new-system.example.com" class="btn new">切换到新系统（推荐）</a>
+  <a href="https://old-system.example.com" class="btn old">暂时继续用老系统</a>
+
+</body>
+</html>
